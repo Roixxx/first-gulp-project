@@ -1,0 +1,10 @@
+@import 'blocks/header';
+
+$color: green;
+
+
+h1 {
+    color: $color;
+    display: flex; 
+    transition: all 02s ease-in;
+}
