@@ -7,6 +7,22 @@ const autoprefixer = require('gulp-autoprefixer');
 const sourcemaps = require('gulp-sourcemaps');
 const notify = require('gulp-notify');
 const plumber = require('gulp-plumber');
+const fileinclude = require('gulp-file-include');
+
+gulp.task('html', function(callback) {
+    return gulp.src('./app/html/.html')
+        .pipe( plumber({
+            errorHandler: notify.onError(function(err) {
+                return {
+                    title: 'HTML include',
+                    sound: false,
+                    message: 'проебавсь ' + err.message,
+                }
+            })
+        }))
+        
+    callback();
+});
 
 gulp.task('scss', function(callback) {
     return gulp.src('./app/scss/main.scss')
