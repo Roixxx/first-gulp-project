@@ -10,17 +10,9 @@ const plumber = require('gulp-plumber');
 const fileinclude = require('gulp-file-include');
 
 gulp.task('html', function(callback) {
-    return gulp.src('./app/html/.html')
-        .pipe( plumber({
-            errorHandler: notify.onError(function(err) {
-                return {
-                    title: 'HTML include',
-                    sound: false,
-                    message: 'проебавсь ' + err.message,
-                }
-            })
-        }))
-        
+    return gulp.src('./app/html/*.html')
+        .pipe( fileinclude({ prefix: '@@' }) )
+        .pipe( gulp.dest('./app/') )
     callback();
 });
 
@@ -49,10 +41,11 @@ gulp.task('scss', function(callback) {
 gulp.task('watch', function() {
     watch('./app/*.html', gulp.parallel( browserSync.reload ));
     watch('./app/css/**/*.css', gulp.parallel( browserSync.reload ));
-
     watch('./app/scss/**/*.scss', function() {
         setTimeout(gulp.parallel('scss'), 500);
     });
+
+    watch('./app/html/**/*.html', gulp.parallel('html'));
 });
 
 gulp.task('server', function() {
@@ -65,4 +58,4 @@ gulp.task('server', function() {
 
 
 
-gulp.task('default', gulp.parallel('server', 'watch', 'scss'));
+gulp.task('default', gulp.parallel('server', 'watch', 'scss', 'html'));
