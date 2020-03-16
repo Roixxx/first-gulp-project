@@ -48,6 +48,24 @@ gulp.task('watch', function() {
     watch('./src/html/**/*.html', gulp.parallel('html'));
 });
 
+gulp.task('copy:img', function(callback) {
+    return gulp.src('./src/images/**/*.*')
+        .pipe(gulp.dest('./build/images'))
+    callback();
+});
+
+gulp.task('copy:upload', function(callback) {
+    return gulp.src('./src/upload/**/*.*')
+        .pipe(gulp.dest('./build/upload/'))
+    callback();
+});
+
+gulp.task('copy:js', function(callback) {
+    return gulp.src('./src/js/**/*.*')
+        .pipe(gulp.dest('./build/js/'))
+    callback();
+});
+
 gulp.task('server', function() {
     browserSync.init({
         server: {
@@ -58,4 +76,9 @@ gulp.task('server', function() {
 
 
 
-gulp.task('default', gulp.series( gulp.parallel('scss', 'html'), gulp.parallel('server', 'watch') ));
+gulp.task( 'default', 
+    gulp.series( 
+        gulp.parallel('copy:img', 'copy:upload', 'copy:js'), 
+        gulp.parallel('scss', 'html'), 
+        gulp.parallel('server', 'watch') 
+    ));
