@@ -174,7 +174,6 @@ body {
     font: 17px/26px "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #6a6a6a;
     -webkit-font-smoothing: antialiased;
-    -webkit-backface-visibility: hidden;
 }
 .main {
     min-height: 100%;
@@ -357,9 +356,6 @@ footer .logo img {
 
 
 /* sidebar -------------------------- */
-.sidebar {
-    
-}
 
 
 /* content -------------------------- */
@@ -684,7 +680,6 @@ footer .logo img {
         width: auto;
         display: block;
         height: auto;
-        vertical-align: top;
     }
     .tabs {
         display: inline-block;
