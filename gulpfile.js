@@ -44,13 +44,13 @@ gulp.task('scss', function(callback) {
         }))
         .pipe( sourcemaps.write() )
         .pipe( gulp.dest('./build/css/') )
+        .pipe( browserSync.stream() )
     callback(); 
 });
 
 
 gulp.task('watch', function() {
     watch('./build/*.html', gulp.parallel( browserSync.reload ));
-    watch('./build/css/**/*.css', gulp.parallel( browserSync.reload ));
     watch('./src/scss/**/*.scss', function() {
         setTimeout(gulp.parallel('scss'), 500);
     });
