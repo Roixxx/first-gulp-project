@@ -7,13 +7,14 @@ const autoprefixer = require('gulp-autoprefixer');
 const sourcemaps = require('gulp-sourcemaps');
 const notify = require('gulp-notify');
 const plumber = require('gulp-plumber');
-const fileinclude = require('gulp-file-include');
+const pug = require('gulp-pug');
 
-gulp.task('html', function(callback) {
-    return gulp.src('./src/html/*.html')
-        .pipe( fileinclude({ prefix: '@@' }) )
-        .pipe( gulp.dest('./build/') )
-    callback();
+gulp.task('pug', function() {
+    return gulp.src('./src/pug/pages/**/*.pug')
+        .pipe( pug({
+            pretty: true
+        }) )
+        .pipe(gulp.dest('./build/'))
 });
 
 gulp.task('scss', function(callback) {
@@ -44,8 +45,8 @@ gulp.task('watch', function() {
     watch('./src/scss/**/*.scss', function() {
         setTimeout(gulp.parallel('scss'), 500);
     });
+    watch('./src/pug/**/*.pug', gulp.parallel('pug'))
 
-    watch('./src/html/**/*.html', gulp.parallel('html'));
 
     watch('./src/images/**/*.*', gulp.parallel('copy:img'));
     watch('./src/upload/**/*.*', gulp.parallel('copy:upload'));
@@ -83,6 +84,6 @@ gulp.task('server', function() {
 gulp.task( 'default', 
     gulp.series( 
         gulp.parallel('copy:img', 'copy:upload', 'copy:js'), 
-        gulp.parallel('scss', 'html'), 
+        gulp.parallel('pug' ,'scss'), 
         gulp.parallel('server', 'watch') 
     ));
