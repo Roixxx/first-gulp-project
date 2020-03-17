@@ -23,7 +23,7 @@ gulp.task('scss', function(callback) {
                 return {
                     title: 'Styles',
                     sound: false,
-                    message: 'проебавсь ' + err.message,
+                    message: 'Error ' + err.message,
                 }
             })
         }))
@@ -46,6 +46,10 @@ gulp.task('watch', function() {
     });
 
     watch('./src/html/**/*.html', gulp.parallel('html'));
+
+    watch('./src/images/**/*.*', gulp.parallel('copy:img'));
+    watch('./src/upload/**/*.*', gulp.parallel('copy:upload'));
+    watch('./src/js/**/*.*', gulp.parallel('copy:js'));
 });
 
 gulp.task('copy:img', function(callback) {
