@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-html(lang="en")
-    head
-        meta(charset="UTF-8")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title Document
-        link(rel="stylesheet", href="css/main.css")
-    body
-        .header
-            .sos ti reper
-        
-        script(src="js/main.js")
+extends ./../layouts/main.pug
+
+block variables 
+    - let title = "Главная"
+
+block content123
+    p Главаня страница
+    a(href="about.html", title="title") about

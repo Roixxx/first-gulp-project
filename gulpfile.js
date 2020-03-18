@@ -89,7 +89,8 @@ gulp.task('server', function() {
     browserSync.init({
         server: {
             baseDir: "./build/"
-        }
+        },
+        open: false
     });
 });  
 
